@@ -54,7 +54,7 @@ ROOT_URLCONF = 'milano_help.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'milano_help' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
