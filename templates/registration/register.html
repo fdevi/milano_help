@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registrazione</title>
+</head>
+<body>
+    <h2>Registrati</h2>
+
+    {% if form.errors %}
+        <p style="color:red;">Username o password errati</p>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Registrati</button>
+    </form>
+
+    <a href="/accounts/login/">Vai al login</a>
+</body>
+</html>
