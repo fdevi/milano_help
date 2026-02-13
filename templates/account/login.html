@@ -1,0 +1,58 @@
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Milano Help - Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding-top: 50px; background-color: #f4f6f9; }
+        h1 { font-size: 36px; margin-bottom: 20px; }
+        form { display: inline-block; text-align: left; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input { padding: 10px; margin-top: 5px; width: 250px; border-radius: 5px; border: 1px solid #ccc; }
+        .btn { display: block; width: 100%; text-align: center; padding: 10px; margin-top: 15px; border-radius: 5px; color: white; text-decoration: none; border: none; cursor: pointer; font-size: 16px; }
+        .primary { background-color: #007bff; }
+        .secondary { background-color: #28a745; }
+        .google { background-color: #db4437; }
+        .remember { margin-top: 10px; display: flex; align-items: center; }
+        .remember input { width: auto; margin-right: 10px; }
+        .link { margin-top: 10px; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<h1>Milano Help - Login</h1>
+
+{% if form.errors %}
+    <p style="color:red;">Correggi gli errori sotto.</p>
+{% endif %}
+
+<form method="post" action="{% url 'account_login' %}">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <label for="id_login">Email:</label>
+    {{ form.login }}
+
+    <label for="id_password">Password:</label>
+    {{ form.password }}
+
+    <div class="remember">
+        <input type="checkbox" name="remember" id="id_remember">
+        <label for="id_remember">Remember Me</label>
+    </div>
+
+    <button type="submit" class="btn primary">Login</button>
+</form>
+
+<p style="margin-top:20px;">Oppure accedi con un account esterno:</p>
+
+{% if socialaccount_providers.google %}
+    <a href="{% provider_login_url 'google' %}" class="btn google">Login con Google</a>
+{% endif %}
+
+<p class="link">Non hai un account? <a href="{% url 'account_signup' %}">Registrati</a></p>
+
+</body>
+</html>

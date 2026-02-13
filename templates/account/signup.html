@@ -1,0 +1,100 @@
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registrazione - Milano Help</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f6f9;
+            padding-top: 80px;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #222;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        .social-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .google {
+            background-color: #db4437;
+        }
+
+        p {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Registrati a Milano Help</h1>
+
+<form method="POST" action="{% url 'account_signup' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Registrati</button>
+</form>
+
+{% if socialaccount_providers.google %}
+    <p>Oppure registrati con un account sociale:</p>
+    <a href="{% provider_login_url 'google' %}" class="social-btn google">Google</a>
+{% endif %}
+
+<p>Hai già un account? <a href="{% url 'account_login' %}">Accedi</a></p>
+
+</body>
+</html>

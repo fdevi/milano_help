@@ -1,13 +1,13 @@
 from django.contrib import admin
-from django.urls import path
-from django.shortcuts import render
-from core.views import register  # 👈 collega la view register
-
-def home(request):
-    return render(request, 'home.html')
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', home),
     path('admin/', admin.site.urls),
-    path('register/', register),  # 👈 questa è la rotta per la registrazione
+    path('accounts/', include('allauth.urls')),  # Allauth login/registration
+    path('', include('core.urls')),  # Home e altre view del core
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

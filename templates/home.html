@@ -1,63 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Milano Help{% endblock %}
+
+{% block content %}
+<h1>Benvenuto su Milano Help!</h1>
+<p>Questa è la tua piattaforma per trovare e offrire servizi a Milano.</p>
+
 {% if user.is_authenticated %}
-    <p>Ciao {{ user.username }}!</p>
-    <a href="/accounts/logout/">Logout</a>
+    <p>Ciao {{ user.username }}! Benvenuto di nuovo.</p>
 {% else %}
-    <a href="/accounts/login/">Login</a>
+    <p>
+        <a href="{% url 'account_signup' %}">Registrati</a> o 
+        <a href="{% url 'account_login' %}">Accedi</a> per iniziare.
+    </p>
 {% endif %}
-
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Milano Help</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f9;
-            text-align: center;
-            padding-top: 100px;
-        }
-
-        h1 {
-            font-size: 48px;
-            color: #222;
-        }
-
-        p {
-            font-size: 20px;
-            color: #555;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            margin: 20px;
-            font-size: 18px;
-            text-decoration: none;
-            border-radius: 8px;
-            color: white;
-        }
-
-        .primary {
-            background-color: #007bff;
-        }
-
-        .secondary {
-            background-color: #28a745;
-        }
-
-        .btn:hover {
-            opacity: 0.85;
-        }
-    </style>
-</head>
-<body>
-
-    <h1>Milano Help</h1>
-    <p>Trova o offri servizi nella tua città in modo semplice e veloce.</p>
-
-    <a href="#" class="btn primary">Cerco un servizio</a>
-    <a href="#" class="btn secondary">Offro un servizio</a>
-
-</body>
-</html>
+{% endblock %}
